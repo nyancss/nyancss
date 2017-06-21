@@ -1,0 +1,27 @@
+{
+  "name": "decss",
+  "version": "0.1.0",
+  "description": "Converts CSS modules into components",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/kossnocorp/decss.git"
+  },
+  "keywords": [
+    "react",
+    "preact",
+    "css",
+    "modules",
+    "webpack",
+    "css-loader"
+  ],
+  "author": "Sasha Koss <koss@nocorp.me>",
+  "license": "MIT",
+  "bugs": {
+    "url": "https://github.com/kossnocorp/decss/issues"
+  },
+  "homepage": "https://github.com/kossnocorp/decss#readme"
+}
