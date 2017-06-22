@@ -1,11 +1,17 @@
 module.exports = decss
 
-function decss (h, style) {
+function decss (h, style, options) {
+  options = options || {}
   var blocks = getBlocks(style)
 
   return Object.keys(blocks).reduce(function (acc, blockName) {
     acc[blockName] = function (props) {
-      return h('div', {className: getClass(blocks, blockName, props)}, props.children)
+      const tag = (options[blockName] || {}).tag || 'div'
+      return h(
+        tag,
+        { className: getClass(blocks, blockName, props, options) },
+        props && props.children
+      )
     }
     return acc
   }, {})
@@ -48,34 +54,48 @@ function getBlocks (style) {
     }
 
     function ensureBlock (blockClass = className) {
-      acc[blockClass] = acc[blockClass] || { class: style[blockClass], modifiers: {} }
+      acc[blockClass] = acc[blockClass] || {
+        class: style[blockClass],
+        modifiers: {}
+      }
     }
 
     return acc
   }, {})
 }
 
-function getClass (blocks, blockName, props) {
+function getClass (blocks, blockName, props, options) {
+  options = options || {}
   var blockClass = blocks[blockName].class
-  var modifierClasses = Object.keys(props).reduce(function (acc, propName) {
-    var modifier = blocks[blockName].modifiers[propName]
-    var propValue = props[propName]
+  var modifiers = blocks[blockName].modifiers
+
+  var modifierClasses = Object.keys(modifiers).reduce(function (acc, modifierName) {
+    var blockOptions = options[blockName] || {}
+    var defaultPropValue = blockOptions.props && blockOptions.props[modifierName]
+    var modifier = blocks[blockName].modifiers[modifierName]
+    var propValue = props[modifierName]
     if (modifier) {
       switch (modifier.type) {
         case 'bool':
-          if (propValue) {
+          if (typeof propValue === 'boolean' ? propValue : defaultPropValue) {
             return acc.concat(modifier.class)
           }
           break
         case 'enum':
-          return acc.concat(modifier.elements[propValue])
+          return acc.concat(modifier.elements[propValue || defaultPropValue])
       }
     }
     return acc
   }, [])
+
   return classesToString([blockClass].concat(modifierClasses))
 }
 
 function classesToString (classes) {
-  return classes.filter(function (c) { return c }).join(' ')
+  return classes
+    .filter(function (c) {
+      return c
+    })
+    .sort()
+    .join(' ')
 }

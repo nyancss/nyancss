@@ -1,10 +1,10 @@
 {
   "name": "decss",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "Converts CSS modules into components",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "ava"
   },
   "repository": {
     "type": "git",
@@ -23,5 +23,12 @@
   "bugs": {
     "url": "https://github.com/kossnocorp/decss/issues"
   },
-  "homepage": "https://github.com/kossnocorp/decss#readme"
+  "homepage": "https://github.com/kossnocorp/decss#readme",
+  "peerDependencies": {
+    "react": "*",
+    "preact": "*"
+  },
+  "devDependencies": {
+    "ava": "^0.19.1"
+  }
 }
