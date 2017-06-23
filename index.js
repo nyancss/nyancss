@@ -1,15 +1,15 @@
 module.exports = decss
 
-function decss (h, style, options) {
-  options = options || {}
+function decss (h, style, defaultProps) {
+  defaultProps = defaultProps || {}
   var blocks = getBlocks(style)
 
   return Object.keys(blocks).reduce(function (acc, blockName) {
     acc[blockName] = function (props) {
-      const tag = (options[blockName] || {}).tag || 'div'
+      const tag = props.tag || (defaultProps[blockName] || {}).tag || 'div'
       return h(
         tag,
-        { className: getClass(blocks, blockName, props, options) },
+        { className: getClass(blocks, blockName, props, defaultProps) },
         props && props.children
       )
     }
@@ -64,14 +64,14 @@ function getBlocks (style) {
   }, {})
 }
 
-function getClass (blocks, blockName, props, options) {
-  options = options || {}
+function getClass (blocks, blockName, props, defaultProps) {
+  defaultProps = defaultProps || {}
   var blockClass = blocks[blockName].class
   var modifiers = blocks[blockName].modifiers
 
   var modifierClasses = Object.keys(modifiers).reduce(function (acc, modifierName) {
-    var blockOptions = options[blockName] || {}
-    var defaultPropValue = blockOptions.props && blockOptions.props[modifierName]
+    var blockDefaultProps = defaultProps[blockName] || {}
+    var defaultPropValue = blockDefaultProps[modifierName]
     var modifier = blocks[blockName].modifiers[modifierName]
     var propValue = props[modifierName]
     if (modifier) {

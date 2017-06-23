@@ -42,7 +42,28 @@ test('it generates components with enum props', t => {
   ])
 })
 
-test('it allows to override the tag using options', t => {
+test('it allows to override the tag using props', t => {
+  const { Component } = decss(pass, {
+    Component: 'component-class'
+  })
+  const args = Component({ tag: 'span', children: 42 })
+  t.deepEqual(args, ['span', { className: 'component-class' }, 42])
+})
+
+test('it allows to override the default props', t => {
+  const { Component } = decss(pass, {
+    Component: 'component-class',
+    'Component-color-red': 'component-red',
+    'Component-color-green': 'component-green',
+    'Component-disabled': 'component-disabled'
+  }, {
+    Component: {tag: 'main', disabled: true, color: 'green'}
+  })
+  const args = Component({ children: 42 })
+  t.deepEqual(args, ['main', { className: 'component-class component-disabled component-green' }, 42])
+})
+
+test('it allows to override the tag using default props', t => {
   const { Component } = decss(pass, {
     Component: 'component-class'
   }, {
@@ -50,17 +71,4 @@ test('it allows to override the tag using options', t => {
   })
   const args = Component({ children: 42 })
   t.deepEqual(args, ['span', { className: 'component-class' }, 42])
-})
-
-test('it allows to override the default props using options', t => {
-  const { Component } = decss(pass, {
-    Component: 'component-class',
-    'Component-color-red': 'component-red',
-    'Component-color-green': 'component-green',
-    'Component-disabled': 'component-disabled'
-  }, {
-    Component: {tag: 'main', props: {disabled: true, color: 'green'}}
-  })
-  const args = Component({ children: 42 })
-  t.deepEqual(args, ['main', { className: 'component-class component-disabled component-green' }, 42])
 })
