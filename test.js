@@ -72,3 +72,12 @@ test('it allows to override the tag using default props', t => {
   const args = Component({ children: 42 })
   t.deepEqual(args, ['span', { className: 'component-class' }, 42])
 })
+
+test('it passes extra props to the tag element', t => {
+  const { Component } = decss(pass, {
+    Component: 'component-class',
+    'Component-test': 'component-test'
+  })
+  const args = Component({ children: 42, a: 1, b: 2 })
+  t.deepEqual(args, ['div', { className: 'component-class', a: 2, b: 2 }, 42])
+})

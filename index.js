@@ -9,7 +9,13 @@ function decss (h, style, defaultProps) {
       const tag = props.tag || (defaultProps[blockName] || {}).tag || 'div'
       return h(
         tag,
-        { className: getClass(blocks, blockName, props, defaultProps) },
+        Object.assign(
+          { className: getClass(blocks, blockName, props, defaultProps) },
+          without(
+            props,
+            ['tag', 'children'].concat(Object.keys(blocks[blockName].modifiers))
+          )
+        ),
         props && props.children
       )
     }
@@ -69,7 +75,10 @@ function getClass (blocks, blockName, props, defaultProps) {
   var blockClass = blocks[blockName].class
   var modifiers = blocks[blockName].modifiers
 
-  var modifierClasses = Object.keys(modifiers).reduce(function (acc, modifierName) {
+  var modifierClasses = Object.keys(modifiers).reduce(function (
+    acc,
+    modifierName
+  ) {
     var blockDefaultProps = defaultProps[blockName] || {}
     var defaultPropValue = blockDefaultProps[modifierName]
     var modifier = blocks[blockName].modifiers[modifierName]
@@ -98,4 +107,13 @@ function classesToString (classes) {
     })
     .sort()
     .join(' ')
+}
+
+function without (obj, excludeKeys) {
+  return Object.keys(obj).reduce((acc, currentKey) => {
+    if (!excludeKeys.includes(currentKey)) {
+      acc[currentKey] = obj[currentKey]
+    }
+    return acc
+  }, {})
 }
