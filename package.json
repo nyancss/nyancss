@@ -1,8 +1,8 @@
 {
   "name": "decss",
-  "version": "0.5.0",
+  "version": "0.5.1",
   "description": "Converts CSS modules into components",
-  "main": "index.js",
+  "main": "auto.js",
   "scripts": {
     "test": "ava"
   },
@@ -24,10 +24,6 @@
     "url": "https://github.com/kossnocorp/decss/issues"
   },
   "homepage": "https://github.com/kossnocorp/decss#readme",
-  "peerDependencies": {
-    "react": "*",
-    "preact": "*"
-  },
   "devDependencies": {
     "ava": "^0.19.1"
   }
