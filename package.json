@@ -1,6 +1,6 @@
 {
   "name": "decss",
-  "version": "0.5.0",
+  "version": "0.6.0",
   "description": "Converts CSS modules into components",
   "main": "index.js",
   "scripts": {
@@ -16,7 +16,8 @@
     "css",
     "modules",
     "webpack",
-    "css-loader"
+    "css-loader",
+    "css-modules"
   ],
   "author": "Sasha Koss <koss@nocorp.me>",
   "license": "MIT",
@@ -24,10 +25,6 @@
     "url": "https://github.com/kossnocorp/decss/issues"
   },
   "homepage": "https://github.com/kossnocorp/decss#readme",
-  "peerDependencies": {
-    "react": "*",
-    "preact": "*"
-  },
   "devDependencies": {
     "ava": "^0.19.1"
   }
