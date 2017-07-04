@@ -4,7 +4,8 @@
   "description": "Converts CSS modules into components",
   "main": "index.js",
   "scripts": {
-    "test": "ava"
+    "test": "ava",
+    "stats": "babili index.js -o dist.js && gzip-size dist.js"
   },
   "repository": {
     "type": "git",
@@ -26,6 +27,8 @@
   },
   "homepage": "https://github.com/kossnocorp/decss#readme",
   "devDependencies": {
-    "ava": "^0.19.1"
+    "ava": "^0.19.1",
+    "babili": "^0.1.4",
+    "gzip-size": "^3.0.0"
   }
 }
