@@ -4,6 +4,8 @@
 simple CSS class naming convention it generates enum and boolean props 
 for the component automatically so you can keep your code clean and tidy.
 
+The runtime size is exactly **643 B**.
+
 ![](https://d3vv6lp55qjaqc.cloudfront.net/items/3K0o2q351y0i0N3R3Q1Y/decss.png)
 
 ## Installation
