@@ -5,7 +5,7 @@ function decss (h, style, defaultProps) {
   var blocks = getBlocks(style)
 
   return Object.keys(blocks).reduce(function (acc, blockName) {
-    acc[blockName] = function (props) {
+    const component = function (props) {
       const tag = props.tag || (defaultProps[blockName] || {}).tag || 'div'
       return h(
         tag,
@@ -19,6 +19,8 @@ function decss (h, style, defaultProps) {
         props && props.children
       )
     }
+    component.displayName = blockName
+    acc[blockName] = component
     return acc
   }, {})
 }
