@@ -1,16 +1,14 @@
 # decss
 
-decss converts [CSS modules] to React/Preact components. Thanks to
-a simple CSS class naming convention it allows to automatically
-generate enum and boolean props so that you can keep your code
-clean and tidy.
+**decss** converts [CSS modules] into React/Preact components. Thanks to
+simple CSS class naming convention it generates enum and boolean props 
+for the component automatically so you can keep your code clean and tidy.
 
 ![](https://d3vv6lp55qjaqc.cloudfront.net/items/3K0o2q351y0i0N3R3Q1Y/decss.png)
 
 ## Installation
 
-If you want to use decss with **webpack**,
-install [`decss-loader`][decss-loader]:
+If you want to use decss with **webpack**, install [decss-loader]:
 
 ```bash
 npm install decss-loader --save-dev
@@ -18,7 +16,7 @@ npm install decss-loader --save-dev
 yarn add --dev decss-loader
 ```
 
-To use low-level API, or to manage the core library version, install `decss`:
+To use the low-level API, or to manage the core library version, install `decss`:
 
 ```bash
 npm install decss --save
@@ -91,8 +89,7 @@ function PanicButton ({ alreadyPanicking }) {
 
 ### Component (`.Component`)
 
-`.Component` is a component 🤡 The name must be in class-case, e.g. `.FormInput`, `.UI`, etc:
-
+`.Component` is a component 🤡 The name must be in class-case, e.g. `.FormInput`, `.UI`.
 
 In this example, `.Button` represents `<Button />`.
 
@@ -112,8 +109,7 @@ In this example, `.Button` represents `<Button />`.
 }
 ```
 
-In the example, `.Button-disabled` is applied to `.Button`
-when `disabled` prop is truthy:
+In the example, `.Button-disabled` is applied to the component when its `disabled` prop is truthy:
 
 ```javascript
 <Button disabled>
@@ -135,7 +131,7 @@ when `disabled` prop is truthy:
 }
 ```
 
-`.Button-color-red` is applied to `.Button` when `color` prop equals `"red"`:
+`.Button-color-red` is applied to the component when its `color` prop equals `"red"`:
 
 ```jsx
 <Button color='red'>

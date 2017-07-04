@@ -2,7 +2,7 @@ module.exports = decss
 
 /**
  * @name decss
- * @summary It generates components using passed CSS modules object.
+ * @summary Generate components using passed CSS modules object.
  *
  * @description
  * The function generates components using passed CSS modules object.
