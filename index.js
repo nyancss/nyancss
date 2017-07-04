@@ -1,33 +1,83 @@
 module.exports = decss
 
-function decss (h, style, defaultProps) {
-  defaultProps = defaultProps || {}
-  var blocks = getBlocks(style)
+/**
+ * @name decss
+ * @summary Generate components using passed CSS modules object.
+ *
+ * @description
+ * The function generates components using passed CSS modules object.
+ * It's optionally accepting default props object that allows binding
+ * individual props values.
+ *
+ * @param {Function} h
+ * The helper function (e.g. `React.createElement` or Preact's `h`).
+ *
+ * @param {Object} style
+ * The CSS modules object with original (local) class names as keys
+ * and unique names as values.
+ *
+ * @param {Object} [defaultProps]
+ * The object with the default props.
+ *
+ * @returns {Object}
+ * The object with component names as keys and components as values.
+ *
+ * @example
+ * import { createElement } from 'react'
+ * import style from './style.css'
+ * import decss from 'decss'
 
-  return Object.keys(blocks).reduce(function (acc, blockName) {
-    var component = function (props) {
-      var tag = props.tag || (defaultProps[blockName] || {}).tag || 'div'
+ * // Basic usage
+ * const { Button, Icon } = decss(createElement, style)
+ * <Button tag='button' type='button'>
+ *   <Icon type='close' />
+ *   Close
+ * </Button>
+
+ * // Usage with default props
+ * const { Button, Icon } = decss(createElement, style, {
+ *   Button: {tag: 'button', type: 'button'},
+ *   Icon: {type: 'close'}
+ * })
+ * <Button><Icon />Close</Button>
+ */
+function decss(h, style, defaultProps) {
+  defaultProps = defaultProps || {}
+  var components = getComponents(style)
+
+  return Object.keys(components).reduce(function(acc, componentName) {
+    var component = function(props) {
+      var tag = props.tag || (defaultProps[componentName] || {}).tag || 'div'
       return h(
         tag,
         Object.assign(
-          { className: getClass(blocks, blockName, props, defaultProps) },
+          {
+            className: getClassName(
+              components,
+              componentName,
+              props,
+              defaultProps
+            )
+          },
           without(
             props,
-            ['tag', 'children'].concat(Object.keys(blocks[blockName].modifiers))
+            ['tag', 'children'].concat(
+              Object.keys(components[componentName].modifiers)
+            )
           )
         ),
         props && props.children
       )
     }
-    component.displayName = blockName
-    acc[blockName] = component
+    component.displayName = componentName
+    acc[componentName] = component
     return acc
   }, {})
 }
 
-function getBlocks (style) {
+function getComponents(style) {
   var classes = Object.keys(style)
-  return classes.reduce(function (acc, className) {
+  return classes.reduce(function(acc, className) {
     var isModifier = className.includes('-')
     if (isModifier) {
       var classNameCaptures = className.match(/([^-]+)-(.+)/)
@@ -61,7 +111,7 @@ function getBlocks (style) {
       ensureBlock()
     }
 
-    function ensureBlock (blockClass = className) {
+    function ensureBlock(blockClass = className) {
       acc[blockClass] = acc[blockClass] || {
         class: style[blockClass],
         modifiers: {}
@@ -72,12 +122,12 @@ function getBlocks (style) {
   }, {})
 }
 
-function getClass (blocks, blockName, props, defaultProps) {
+function getClassName(blocks, blockName, props, defaultProps) {
   defaultProps = defaultProps || {}
   var blockClass = blocks[blockName].class
   var modifiers = blocks[blockName].modifiers
 
-  var modifierClasses = Object.keys(modifiers).reduce(function (
+  var modifierClasses = Object.keys(modifiers).reduce(function(
     acc,
     modifierName
   ) {
@@ -102,16 +152,16 @@ function getClass (blocks, blockName, props, defaultProps) {
   return classesToString([blockClass].concat(modifierClasses))
 }
 
-function classesToString (classes) {
+function classesToString(classes) {
   return classes
-    .filter(function (c) {
+    .filter(function(c) {
       return c
     })
     .sort()
     .join(' ')
 }
 
-function without (obj, excludeKeys) {
+function without(obj, excludeKeys) {
   return Object.keys(obj).reduce((acc, currentKey) => {
     if (!excludeKeys.includes(currentKey)) {
       acc[currentKey] = obj[currentKey]
