@@ -152,8 +152,8 @@ To set the default value to certain enum option, use good ol' CSS:
 
 ## Related
 
-- [styled-components]: source of inspiration.
-- [React CSS components]: similar project.
+- [styled-components]: the source of inspiration.
+- [React CSS components]: a similar project.
 - [decss-loader]: decss webpack loader source code.
 
 ## License
