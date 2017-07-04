@@ -1,81 +1,172 @@
 # decss
 
-CSS components
+decss converts [CSS modules] to React/Preact components. Thanks to
+a simple CSS class naming convention it allows to automatically
+generate enum and boolean props so that you can keep your code
+clean and tidy.
 
-## Syntax
+![](https://d3vv6lp55qjaqc.cloudfront.net/items/3K0o2q351y0i0N3R3Q1Y/decss.png)
 
+## Installation
 
-### Basic component 
+If you want to use decss with **webpack**,
+install [`decss-loader`][decss-loader]:
 
-CSS:
-``` css
-.Loader {
-  background: blue;
-  height: 4px;
+```bash
+npm install decss-loader --save-dev
+# or
+yarn add --dev decss-loader
+```
+
+To use low-level API, or to manage the core library version, install `decss`:
+
+```bash
+npm install decss --save
+# or
+yarn add decss
+```
+
+## Configuration
+
+```js
+// ...
+{
+  test: /\.css$/,
+  use: [
+    'style',
+    'decss/react', // 👈 Add loader (use 'decss/preact' for Preact)
+    {
+      loader: 'css',
+      options: {
+        modules: true, // 👈 You must enable modules to make it work
+        importLoaders: 1,
+        localIdentName: '[local]-[hash:base64:5]',
+      }
+    },
+    'postcss'
+  ],
+
+  // or if you prefer classic:
+
+  loader: 'style!decss/preact!css?modules&importLoaders=1&localIdentName=[local]-[hash:base64:5]&!postcss'
+},
+// ...
+```
+
+## Usage
+
+See [low-level API docs](https://github.com/kossnocorp/decss/blob/master/index.js) for more implementation details.
+
+### React
+
+```javascript
+import React from 'react'
+import { Button } from './style.css'
+
+function PanicButton ({ alreadyPanicking }) {
+  return (
+    <Button tag='button' color='red' disabled={alreadyPanicking}>
+      Panic
+    </Button>
+  )
 }
 ```
 
-React:
-``` js
-import { Loader } from './style.css'
+### Preact
 
-render () {
-  return <Loader />
+```javascript
+import { h } from 'preact'
+import { Button } from './style.css'
+
+function PanicButton ({ alreadyPanicking }) {
+  return (
+    <Button tag='button' color='red' disabled={alreadyPanicking}>
+      Panic
+    </Button>
+  )
 }
 ```
 
+## Convention
 
-### Boolean properties
+### Component (`.Component`)
 
-CSS:
-``` css
-.Loader-isDisabled {
-  opacity: 0.5;
+`.Component` is a component 🤡 The name must be in class-case, e.g. `.FormInput`, `.UI`, etc:
+
+
+In this example, `.Button` represents `<Button />`.
+
+```css
+.Button {
+  color: white;
 }
 ```
 
-React:
-``` js
-import { Loader } from './style.css'
+### Boolean Prop (`.Component-propName`)
 
-render () {
-  return <Loader isDisabled />
+`.*-disabled` is a boolean prop.
+
+```css
+.Button-disabled {
+  opacity: .5;
 }
 ```
 
-### Enum properties
+In the example, `.Button-disabled` is applied to `.Button`
+when `disabled` prop is truthy:
 
-CSS:
-``` css
-.Loader-color-green {
+```javascript
+<Button disabled>
+  Whatever
+</Button>
+```
+
+### Enum Prop (`.Component-propName-option`)
+
+`.*-color-gray` is an enum prop.
+
+```css
+.Button-color-red {
+  background: red;
+}
+
+.Button-color-green {
   background: green;
 }
 ```
 
-React:
-``` js
-import { Loader } from './style.css'
+`.Button-color-red` is applied to `.Button` when `color` prop equals `"red"`:
 
-render () {
-  return <Loader color='green' />
-}
+```jsx
+<Button color='red'>
+  Click Me
+</Button>
 ```
 
-### Default properties
+### Setting Default Value
 
-CSS:
-``` css
-.Loader, 
-.Loader-color-green {
+To set the default value to certain enum option, use good ol' CSS:
+
+```css
+.Button,
+.Button-color-green {
   background: green;
 }
 ```
 
-React (Loder is green by default):
-``` js
-import { Loader } from './style.css'
+## Related
 
-render () {
-  return <Loader /> 
-}
-```
+- [styled-components]: source of inspiration.
+- [React CSS components]: similar project.
+- [decss-loader]: decss webpack loader source code.
+
+## License
+
+[MIT © Sasha Koss](https://kossnocorp.mit-license.org/)
+
+[styled-components]: https://www.styled-components.com/
+[CSS Modules]: https://github.com/css-modules/css-modules
+[React CSS components]: https://github.com/andreypopp/react-css-components
+[desvg]: https://github.com/kossnocorp/desvg
+[desvg-loader]: https://github.com/kossnocorp/desvg
+[decss-loader]: https://github.com/kossnocorp/decss-loader

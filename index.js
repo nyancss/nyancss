@@ -1,5 +1,46 @@
 module.exports = decss
 
+/**
+ * @name decss
+ * @summary It generates components using passed CSS modules object.
+ *
+ * @description
+ * The function generates components using passed CSS modules object.
+ * It's optionally accepting default props object that allows binding
+ * individual props values.
+ *
+ * @param {Function} h
+ * The helper function (e.g. `React.createElement` or Preact's `h`).
+ *
+ * @param {Object} style
+ * The CSS modules object with original (local) class names as keys
+ * and unique names as values.
+ *
+ * @param {Object} [defaultProps]
+ * The object with the default props.
+ *
+ * @returns {Object}
+ * The object with component names as keys and components as values.
+ *
+ * @example
+ * import { createElement } from 'react'
+ * import style from './style.css'
+ * import decss from 'decss'
+
+ * // Basic usage
+ * const { Button, Icon } = decss(createElement, style)
+ * <Button tag='button' type='button'>
+ *   <Icon type='close' />
+ *   Close
+ * </Button>
+
+ * // Usage with default props
+ * const { Button, Icon } = decss(createElement, style, {
+ *   Button: {tag: 'button', type: 'button'},
+ *   Icon: {type: 'close'}
+ * })
+ * <Button><Icon />Close</Button>
+ */
 function decss (h, style, defaultProps) {
   defaultProps = defaultProps || {}
   var blocks = getBlocks(style)
