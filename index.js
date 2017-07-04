@@ -41,34 +41,43 @@ module.exports = decss
  * })
  * <Button><Icon />Close</Button>
  */
-function decss (h, style, defaultProps) {
+function decss(h, style, defaultProps) {
   defaultProps = defaultProps || {}
-  var blocks = getBlocks(style)
+  var components = getComponents(style)
 
-  return Object.keys(blocks).reduce(function (acc, blockName) {
-    var component = function (props) {
-      var tag = props.tag || (defaultProps[blockName] || {}).tag || 'div'
+  return Object.keys(components).reduce(function(acc, componentName) {
+    var component = function(props) {
+      var tag = props.tag || (defaultProps[componentName] || {}).tag || 'div'
       return h(
         tag,
         Object.assign(
-          { className: getClass(blocks, blockName, props, defaultProps) },
+          {
+            className: getClassName(
+              components,
+              componentName,
+              props,
+              defaultProps
+            )
+          },
           without(
             props,
-            ['tag', 'children'].concat(Object.keys(blocks[blockName].modifiers))
+            ['tag', 'children'].concat(
+              Object.keys(components[componentName].modifiers)
+            )
           )
         ),
         props && props.children
       )
     }
-    component.displayName = blockName
-    acc[blockName] = component
+    component.displayName = componentName
+    acc[componentName] = component
     return acc
   }, {})
 }
 
-function getBlocks (style) {
+function getComponents(style) {
   var classes = Object.keys(style)
-  return classes.reduce(function (acc, className) {
+  return classes.reduce(function(acc, className) {
     var isModifier = className.includes('-')
     if (isModifier) {
       var classNameCaptures = className.match(/([^-]+)-(.+)/)
@@ -102,7 +111,7 @@ function getBlocks (style) {
       ensureBlock()
     }
 
-    function ensureBlock (blockClass = className) {
+    function ensureBlock(blockClass = className) {
       acc[blockClass] = acc[blockClass] || {
         class: style[blockClass],
         modifiers: {}
@@ -113,12 +122,12 @@ function getBlocks (style) {
   }, {})
 }
 
-function getClass (blocks, blockName, props, defaultProps) {
+function getClassName(blocks, blockName, props, defaultProps) {
   defaultProps = defaultProps || {}
   var blockClass = blocks[blockName].class
   var modifiers = blocks[blockName].modifiers
 
-  var modifierClasses = Object.keys(modifiers).reduce(function (
+  var modifierClasses = Object.keys(modifiers).reduce(function(
     acc,
     modifierName
   ) {
@@ -143,16 +152,16 @@ function getClass (blocks, blockName, props, defaultProps) {
   return classesToString([blockClass].concat(modifierClasses))
 }
 
-function classesToString (classes) {
+function classesToString(classes) {
   return classes
-    .filter(function (c) {
+    .filter(function(c) {
       return c
     })
     .sort()
     .join(' ')
 }
 
-function without (obj, excludeKeys) {
+function without(obj, excludeKeys) {
   return Object.keys(obj).reduce((acc, currentKey) => {
     if (!excludeKeys.includes(currentKey)) {
       acc[currentKey] = obj[currentKey]

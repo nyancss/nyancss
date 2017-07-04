@@ -1,10 +1,10 @@
 import test from 'ava'
 import decss from '.'
 
-const pass = (...whatever) => whatever
+const passArgs = (...whatever) => whatever
 
 test('it generates simple components', t => {
-  const { Component } = decss(pass, { Component: 'component-class' })
+  const { Component } = decss(passArgs, { Component: 'component-class' })
   const [tag, props, children] = Component({ children: 42 })
   t.true(tag === 'div')
   t.deepEqual(props, { className: 'component-class' })
@@ -12,7 +12,7 @@ test('it generates simple components', t => {
 })
 
 test('it generates components with bool props', t => {
-  const { Component } = decss(pass, {
+  const { Component } = decss(passArgs, {
     Component: 'component-class',
     'Component-disabled': 'component-disabled'
   })
@@ -27,7 +27,7 @@ test('it generates components with bool props', t => {
 })
 
 test('it generates components with enum props', t => {
-  const { Component } = decss(pass, {
+  const { Component } = decss(passArgs, {
     Component: 'component-class',
     'Component-color-red': 'component-red',
     'Component-color-green': 'component-green'
@@ -43,7 +43,7 @@ test('it generates components with enum props', t => {
 })
 
 test('it allows to override the tag using props', t => {
-  const { Component } = decss(pass, {
+  const { Component } = decss(passArgs, {
     Component: 'component-class'
   })
   const args = Component({ tag: 'span', children: 42 })
@@ -51,33 +51,45 @@ test('it allows to override the tag using props', t => {
 })
 
 test('it allows to override the default props', t => {
-  const { Component } = decss(pass, {
-    Component: 'component-class',
-    'Component-color-red': 'component-red',
-    'Component-color-green': 'component-green',
-    'Component-disabled': 'component-disabled'
-  }, {
-    Component: {tag: 'main', disabled: true, color: 'green'}
-  })
+  const { Component } = decss(
+    passArgs,
+    {
+      Component: 'component-class',
+      'Component-color-red': 'component-red',
+      'Component-color-green': 'component-green',
+      'Component-disabled': 'component-disabled'
+    },
+    {
+      Component: { tag: 'main', disabled: true, color: 'green' }
+    }
+  )
   const args = Component({ children: 42 })
-  t.deepEqual(args, ['main', { className: 'component-class component-disabled component-green' }, 42])
+  t.deepEqual(args, [
+    'main',
+    { className: 'component-class component-disabled component-green' },
+    42
+  ])
 })
 
 test('it allows to override the tag using default props', t => {
-  const { Component } = decss(pass, {
-    Component: 'component-class'
-  }, {
-    Component: {tag: 'span'}
-  })
+  const { Component } = decss(
+    passArgs,
+    {
+      Component: 'component-class'
+    },
+    {
+      Component: { tag: 'span' }
+    }
+  )
   const args = Component({ children: 42 })
   t.deepEqual(args, ['span', { className: 'component-class' }, 42])
 })
 
 test('it passes extra props to the tag element', t => {
-  const { Component } = decss(pass, {
+  const { Component } = decss(passArgs, {
     Component: 'component-class',
     'Component-test': 'component-test'
   })
   const args = Component({ children: 42, a: 1, b: 2 })
-  t.deepEqual(args, ['div', { className: 'component-class', a: 2, b: 2 }, 42])
+  t.deepEqual(args, ['div', { className: 'component-class', a: 1, b: 2 }, 42])
 })
