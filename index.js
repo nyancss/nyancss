@@ -41,79 +41,81 @@ module.exports = decss
  * })
  * <Button><Icon />Close</Button>
  */
-function decss(h, style, defaultProps) {
+function decss (h, style, defaultProps) {
   defaultProps = defaultProps || {}
   var components = getComponents(style)
 
-  return Object.keys(components).reduce(function(acc, componentName) {
-    var component = function(props) {
-      var tag = props.tag || (defaultProps[componentName] || {}).tag || 'div'
-      return h(
-        tag,
-        Object.assign(
-          {
-            className: getClassName(
-              components,
-              componentName,
-              props,
-              defaultProps
-            )
-          },
-          without(
-            props,
-            ['tag', 'children'].concat(
-              Object.keys(components[componentName].modifiers)
-            )
-          )
-        ),
-        props && props.children
-      )
-    }
-    component.displayName = componentName
-    acc[componentName] = component
+  return Object.keys(components).reduce(function (acc, componentName) {
+    acc[componentName] = createComponent(
+      h,
+      components[componentName],
+      componentName,
+      defaultProps[componentName] || {}
+    )
     return acc
   }, {})
 }
 
-function getComponents(style) {
+function createComponent (h, componentObj, componentName, defaultProps) {
+  var component = function (props) {
+    var tag = props.tag || defaultProps.tag || 'div'
+    var className = getClassName(
+      componentObj.class,
+      componentObj.modifiers,
+      Object.assign({}, props, defaultProps)
+    )
+    var tagProps = without(
+      props,
+      ['tag', 'children'].concat(Object.keys(componentObj.modifiers))
+    )
+    var compoundProps = Object.assign({ className: className }, tagProps)
+    var helperArgs = [tag, compoundProps].concat(
+      (props && props.children) || []
+    )
+    return h.apply(null, helperArgs)
+  }
+  component.displayName = componentName
+  return component
+}
+
+function getComponents (style) {
   var classes = Object.keys(style)
-  return classes.reduce(function(acc, className) {
+  return classes.reduce(function (acc, className) {
     var isModifier = className.includes('-')
     if (isModifier) {
       var classNameCaptures = className.match(/([^-]+)-(.+)/)
-      var blockClass = classNameCaptures[1]
+      var componentClass = classNameCaptures[1]
       var modifierPart = classNameCaptures[2]
-      ensureBlock(blockClass)
       var isEnum = modifierPart.includes('-')
+
+      ensureComponentMap(componentClass)
+      var modifiers = acc[componentClass].modifiers
 
       if (isEnum) {
         var modifierCaptures = modifierPart.match(/^(.+)-(.+)$/)
         var propName = modifierCaptures[1]
         var element = modifierCaptures[2]
-
-        acc[blockClass].modifiers[propName] = acc[blockClass].modifiers[
-          propName
-        ] || {
+        var modifier = (modifiers[propName] = modifiers[propName] || {
           type: 'enum',
           elements: {}
-        }
+        })
 
-        acc[blockClass].modifiers[propName].elements[element] = style[className]
+        modifier.elements[element] = style[className]
       } else {
         // is bool
         var propName = modifierPart
-        acc[blockClass].modifiers[propName] = {
+        modifiers[propName] = {
           type: 'bool',
           class: style[className]
         }
       }
     } else {
-      ensureBlock()
+      ensureComponentMap(className)
     }
 
-    function ensureBlock(blockClass = className) {
-      acc[blockClass] = acc[blockClass] || {
-        class: style[blockClass],
+    function ensureComponentMap (className) {
+      acc[className] = acc[className] || {
+        class: style[className],
         modifiers: {}
       }
     }
@@ -122,47 +124,41 @@ function getComponents(style) {
   }, {})
 }
 
-function getClassName(blocks, blockName, props, defaultProps) {
-  defaultProps = defaultProps || {}
-  var blockClass = blocks[blockName].class
-  var modifiers = blocks[blockName].modifiers
-
-  var modifierClasses = Object.keys(modifiers).reduce(function(
-    acc,
-    modifierName
-  ) {
-    var blockDefaultProps = defaultProps[blockName] || {}
-    var defaultPropValue = blockDefaultProps[modifierName]
-    var modifier = blocks[blockName].modifiers[modifierName]
+function getClassName (componentClass, modifiers, props) {
+  var modifierNames = Object.keys(modifiers)
+  var modifierClasses = modifierNames.reduce(function (acc, modifierName) {
+    var modifier = modifiers[modifierName]
     var propValue = props[modifierName]
-    if (modifier) {
-      switch (modifier.type) {
-        case 'bool':
-          if (typeof propValue === 'boolean' ? propValue : defaultPropValue) {
-            return acc.concat(modifier.class)
-          }
-          break
-        case 'enum':
-          return acc.concat(modifier.elements[propValue || defaultPropValue])
-      }
-    }
-    return acc
+    return acc.concat(findModifierClassName(modifier, propValue) || [])
   }, [])
-
-  return classesToString([blockClass].concat(modifierClasses))
+  return classesToString([componentClass].concat(modifierClasses))
 }
 
-function classesToString(classes) {
+function findModifierClassName (modifier, propValue) {
+  if (modifier) {
+    switch (modifier.type) {
+      case 'bool':
+        if (propValue) {
+          return modifier.class
+        }
+        break
+      case 'enum':
+        return modifier.elements[propValue]
+    }
+  }
+}
+
+function classesToString (classes) {
   return classes
-    .filter(function(c) {
+    .filter(function (c) {
       return c
     })
     .sort()
     .join(' ')
 }
 
-function without(obj, excludeKeys) {
-  return Object.keys(obj).reduce((acc, currentKey) => {
+function without (obj, excludeKeys) {
+  return Object.keys(obj).reduce(function (acc, currentKey) {
     if (!excludeKeys.includes(currentKey)) {
       acc[currentKey] = obj[currentKey]
     }

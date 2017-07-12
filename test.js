@@ -11,6 +11,14 @@ test('it generates simple components', t => {
   t.true(children === 42)
 })
 
+test('it pass children arrays', t => {
+  const { Component } = decss(passArgs, { Component: 'component-class' })
+  const [, , c1, c2, c3] = Component({ children: [1, 2, 3] })
+  t.true(c1 === 1)
+  t.true(c2 === 2)
+  t.true(c3 === 3)
+})
+
 test('it generates components with bool props', t => {
   const { Component } = decss(passArgs, {
     Component: 'component-class',
