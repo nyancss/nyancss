@@ -6,6 +6,8 @@ for the component automatically so you can keep your code clean and tidy.
 
 The runtime size is exactly **664 B**.
 
+> 💁 [See Medium post][medium-post] for introduction and reasoning behind
+
 ![](https://d3vv6lp55qjaqc.cloudfront.net/items/3K0o2q351y0i0N3R3Q1Y/decss.png)
 
 ## Installation
@@ -168,3 +170,4 @@ To set the default value to certain enum option, use good ol' CSS:
 [desvg]: https://github.com/kossnocorp/desvg
 [desvg-loader]: https://github.com/kossnocorp/desvg
 [decss-loader]: https://github.com/kossnocorp/decss-loader
+[medium-post]: https://medium.com/@kossnocorp/js-in-css-df4cf8b9b96c
