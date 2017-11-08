@@ -35,22 +35,48 @@ yarn add decss
 {
   test: /\.css$/,
   use: [
-    'style',
-    'decss/react', // 👈 Add loader (use 'decss/preact' for Preact)
+    'style-loader',
+    'decss-loader/react', // 👈 Add loader (use 'decss-loader/preact' for Preact)
     {
-      loader: 'css',
+      loader: 'css-loader',
       options: {
         modules: true, // 👈 You must enable modules to make it work
         importLoaders: 1,
         localIdentName: '[local]-[hash:base64:5]',
       }
     },
-    'postcss'
+    'postcss-loader'
   ],
 
   // or if you prefer classic:
 
   loader: 'style!decss/preact!css?modules&importLoaders=1&localIdentName=[local]-[hash:base64:5]&!postcss'
+},
+// ...
+```
+
+Usage with [ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-webpack-plugin):
+
+```js
+// ...
+{
+  test: /\.css$/,
+  use: ['decss-loader/preact'].concat(
+    ExtractTextPlugin.extract({
+      fallback: 'style-loader',
+      use: [
+        {
+          loader: 'css-loader',
+          options: {
+            modules: true,
+            importLoaders: 1,
+            localIdentName: '[local]-[hash:base64:5]'
+          }
+        },
+        'postcss-loader'
+      ]
+    })
+)
 },
 // ...
 ```
