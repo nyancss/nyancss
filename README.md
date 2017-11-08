@@ -76,7 +76,7 @@ Usage with [ExtractTextPlugin](https://github.com/webpack-contrib/extract-text-w
         'postcss-loader'
       ]
     })
-)
+  )
 },
 // ...
 ```
