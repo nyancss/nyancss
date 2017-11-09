@@ -81,12 +81,12 @@ function createComponent (h, componentObj, componentName, defaultProps) {
 function getComponents (style) {
   var classes = Object.keys(style)
   return classes.reduce(function (acc, className) {
-    var isModifier = className.includes('-')
+    var isModifier = /-/.test(className)
     if (isModifier) {
       var classNameCaptures = className.match(/([^-]+)-(.+)/)
       var componentClass = classNameCaptures[1]
       var modifierPart = classNameCaptures[2]
-      var isEnum = modifierPart.includes('-')
+      var isEnum = /-/.test(modifierPart)
 
       ensureComponentMap(componentClass)
       var modifiers = acc[componentClass].modifiers
@@ -159,7 +159,7 @@ function classesToString (classes) {
 
 function without (obj, excludeKeys) {
   return Object.keys(obj).reduce(function (acc, currentKey) {
-    if (!excludeKeys.includes(currentKey)) {
+    if (excludeKeys.indexOf(currentKey) === -1) {
       acc[currentKey] = obj[currentKey]
     }
     return acc
