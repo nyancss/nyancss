@@ -180,6 +180,11 @@ To set the default value to certain enum option, use good ol' CSS:
 }
 ```
 
+### Refs to DOM nodes
+Passing ref to component will give a ref to the decss wrapper, not to DOM node. So it's not possible to call DOM methods, like focus on that wrapper. To get a ref to wrapped DOM node, pass innerRef prop.
+
+> Note: innerRef only supports callback refs (i.e. ref={comp => this.bla = comp}), string refs (i.e. ref="bla") won't work.
+
 ## Related
 
 - [styled-components]: the source of inspiration.

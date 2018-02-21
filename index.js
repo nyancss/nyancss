@@ -66,9 +66,13 @@ function createComponent (h, componentObj, componentName, defaultProps) {
     )
     var tagProps = without(
       props,
-      ['tag', 'children'].concat(Object.keys(componentObj.modifiers))
+      ['tag', 'children', 'innerRef'].concat(Object.keys(componentObj.modifiers))
     )
     var compoundProps = Object.assign({ className: className }, tagProps)
+    if (props.innerRef) {
+      compoundProps.ref = props.innerRef
+      delete compoundProps.innerRef
+    }
     var helperArgs = [tag, compoundProps].concat(
       (props && props.children) || []
     )

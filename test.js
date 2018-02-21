@@ -101,3 +101,15 @@ test('it passes extra props to the tag element', t => {
   const args = Component({ children: 42, a: 1, b: 2 })
   t.deepEqual(args, ['div', { className: 'component-class', a: 1, b: 2 }, 42])
 })
+
+
+test('it passes refs callback to the tag element', t => {
+  const refsCallback = () => {}
+  const { Component } = decss(
+    passArgs, {
+      Component: 'component-class'
+    }
+  )
+  const args = Component({ children: 42, innerRef: refsCallback })
+  t.deepEqual(args, ['div', { className: 'component-class', ref: refsCallback }, 42])
+})
