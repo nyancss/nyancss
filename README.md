@@ -4,7 +4,7 @@
 simple CSS class naming convention it generates enum and boolean props
 for the component automatically so you can keep your code clean and tidy.
 
-The runtime size is exactly **673 B**.
+The runtime size is exactly **693 B**.
 
 > 💁 [See Medium post][medium-post] for introduction and reasoning behind
 
@@ -91,9 +91,9 @@ See [low-level API docs](https://github.com/kossnocorp/decss/blob/master/index.j
 import React from 'react'
 import { Button } from './style.css'
 
-function PanicButton ({ alreadyPanicking }) {
+function PanicButton({ alreadyPanicking }) {
   return (
-    <Button tag='button' color='red' disabled={alreadyPanicking}>
+    <Button tag="button" color="red" disabled={alreadyPanicking}>
       Panic
     </Button>
   )
@@ -106,9 +106,9 @@ function PanicButton ({ alreadyPanicking }) {
 import { h } from 'preact'
 import { Button } from './style.css'
 
-function PanicButton ({ alreadyPanicking }) {
+function PanicButton({ alreadyPanicking }) {
   return (
-    <Button tag='button' color='red' disabled={alreadyPanicking}>
+    <Button tag="button" color="red" disabled={alreadyPanicking}>
       Panic
     </Button>
   )
@@ -135,16 +135,14 @@ In this example, `.Button` represents `<Button />`.
 
 ```css
 .Button-disabled {
-  opacity: .5;
+  opacity: 0.5;
 }
 ```
 
 In the example, `.Button-disabled` is applied to the component when its `disabled` prop is truthy:
 
 ```javascript
-<Button disabled>
-  Whatever
-</Button>
+<Button disabled>Whatever</Button>
 ```
 
 ### Enum Prop (`.Component-propName-option`)
@@ -164,9 +162,7 @@ In the example, `.Button-disabled` is applied to the component when its `disable
 `.Button-color-red` is applied to the component when its `color` prop equals `"red"`:
 
 ```jsx
-<Button color='red'>
-  Click Me
-</Button>
+<Button color="red">Click Me</Button>
 ```
 
 ### Setting Default Value
@@ -181,23 +177,24 @@ To set the default value to certain enum option, use good ol' CSS:
 ```
 
 ### Refs to DOM nodes
+
 Passing ref to component will give a ref to the decss wrapper, not to DOM node. So it's not possible to call DOM methods, like focus on that wrapper. To get a ref to wrapped DOM node, pass innerRef prop.
 
 > Note: innerRef only supports callback refs (i.e. ref={comp => this.bla = comp}), string refs (i.e. ref="bla") won't work.
 
 ## Related
 
-- [styled-components]: the source of inspiration.
-- [React CSS components]: a similar project.
-- [decss-loader]: decss webpack loader source code.
+* [styled-components]: the source of inspiration.
+* [React CSS components]: a similar project.
+* [decss-loader]: decss webpack loader source code.
 
 ## License
 
 [MIT © Sasha Koss](https://kossnocorp.mit-license.org/)
 
 [styled-components]: https://www.styled-components.com/
-[CSS Modules]: https://github.com/css-modules/css-modules
-[React CSS components]: https://github.com/andreypopp/react-css-components
+[css modules]: https://github.com/css-modules/css-modules
+[react css components]: https://github.com/andreypopp/react-css-components
 [desvg]: https://github.com/kossnocorp/desvg
 [desvg-loader]: https://github.com/kossnocorp/desvg
 [decss-loader]: https://github.com/kossnocorp/decss-loader
