@@ -7,6 +7,12 @@ This change log follows the format documented in [Keep a CHANGELOG].
 [semantic versioning]: http://semver.org/
 [keep a changelog]: http://keepachangelog.com/
 
+## [0.7.1] - 2018-03-23
+
+### Fixed
+
+* Fix children not displaying when it's falsy. See [#11](https://github.com/kossnocorp/decss/pull/11).
+
 ## [0.7.0] - 2018-02-24
 
 ### Added
@@ -23,6 +29,7 @@ This change log follows the format documented in [Keep a CHANGELOG].
 
 Initial public version.
 
+[0.7.1]: https://github.com/kossnocorp/decss-loader/compare/v0.7.0...v0.7.1
 [0.7.0]: https://github.com/kossnocorp/decss-loader/compare/v0.6.2...v0.7.0
 [0.6.2]: https://github.com/kossnocorp/decss-loader/compare/v0.6.1...v0.6.2
 [0.6.1]: https://github.com/kossnocorp/decss/tree/v0.6.1
