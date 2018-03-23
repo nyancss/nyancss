@@ -113,3 +113,11 @@ test('it passes refs callback to the tag element', t => {
   const args = Component({ children: 42, innerRef: refsCallback })
   t.deepEqual(args, ['div', { className: 'component-class', ref: refsCallback }, 42])
 })
+
+
+test('it works with a number of zero as children', t => {
+  const { Component } = decss(passArgs, { Component: 'component-class' })
+  const [, props, children] = Component({ children: 0 })
+  t.deepEqual(props, { className: 'component-class' }, 0)
+  t.true(children === 0)
+})

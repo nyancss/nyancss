@@ -73,7 +73,7 @@ function createComponent (h, componentObj, componentName, defaultProps) {
       compoundProps.ref = props.innerRef
     }
     var helperArgs = [tag, compoundProps].concat(
-      (props && props.children) || []
+      props && props.children !== undefined ? props.children : []
     )
     return h.apply(null, helperArgs)
   }
