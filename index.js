@@ -96,6 +96,11 @@ function getComponents (style) {
 
       if (isEnum) {
         var modifierCaptures = modifierPart.match(/^(.+)-(.+)$/)
+
+        if (!modifierCaptures) {
+          return acc
+        }
+
         var propName = modifierCaptures[1]
         var element = modifierCaptures[2]
         var modifier = (modifiers[propName] = modifiers[propName] || {
