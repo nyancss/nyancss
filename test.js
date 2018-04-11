@@ -123,12 +123,10 @@ test('it works with a number of zero as children', t => {
 })
 
 test('it works with class names not matching the convension', t => {
-  const { Component } = decss(passArgs, {
+  const classes = decss(passArgs, {
     Component: 'component-class',
     'Component-enum-': '123',
     'Component--option': 'qwe'
   })
-  const [, props, children] = Component({ children: 0 })
-  t.deepEqual(props, { className: 'component-class' }, 0)
-  t.true(children === 0)
+  t.deepEqual(Object.keys(classes), ['Component'])
 })
