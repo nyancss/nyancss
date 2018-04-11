@@ -102,21 +102,32 @@ test('it passes extra props to the tag element', t => {
   t.deepEqual(args, ['div', { className: 'component-class', a: 1, b: 2 }, 42])
 })
 
-
 test('it passes refs callback to the tag element', t => {
   const refsCallback = () => {}
-  const { Component } = decss(
-    passArgs, {
-      Component: 'component-class'
-    }
-  )
+  const { Component } = decss(passArgs, {
+    Component: 'component-class'
+  })
   const args = Component({ children: 42, innerRef: refsCallback })
-  t.deepEqual(args, ['div', { className: 'component-class', ref: refsCallback }, 42])
+  t.deepEqual(args, [
+    'div',
+    { className: 'component-class', ref: refsCallback },
+    42
+  ])
 })
-
 
 test('it works with a number of zero as children', t => {
   const { Component } = decss(passArgs, { Component: 'component-class' })
+  const [, props, children] = Component({ children: 0 })
+  t.deepEqual(props, { className: 'component-class' }, 0)
+  t.true(children === 0)
+})
+
+test('it works with class names not matching the convension', t => {
+  const { Component } = decss(passArgs, {
+    Component: 'component-class',
+    'Component-enum-': '123',
+    'Component--option': 'qwe'
+  })
   const [, props, children] = Component({ children: 0 })
   t.deepEqual(props, { className: 'component-class' }, 0)
   t.true(children === 0)
