@@ -62,11 +62,12 @@ function createComponent (h, componentObj, componentName, defaultProps) {
     var className = getClassName(
       componentObj.class,
       componentObj.modifiers,
-      Object.assign({}, props, defaultProps)
+      Object.assign({}, props, defaultProps),
+      props.className
     )
     var tagProps = without(
       props,
-      ['tag', 'children', 'innerRef'].concat(Object.keys(componentObj.modifiers))
+      ['tag', 'children', 'className', 'innerRef'].concat(Object.keys(componentObj.modifiers))
     )
     var compoundProps = Object.assign({ className: className }, tagProps)
     if (props.innerRef) {
@@ -132,14 +133,14 @@ function getComponents (style) {
   }, {})
 }
 
-function getClassName (componentClass, modifiers, props) {
+function getClassName (componentClass, modifiers, props, originalClassName) {
   var modifierNames = Object.keys(modifiers)
   var modifierClasses = modifierNames.reduce(function (acc, modifierName) {
     var modifier = modifiers[modifierName]
     var propValue = props[modifierName]
     return acc.concat(findModifierClassName(modifier, propValue) || [])
   }, [])
-  return classesToString([componentClass].concat(modifierClasses))
+  return classesToString([originalClassName, componentClass].concat(modifierClasses))
 }
 
 function findModifierClassName (modifier, propValue) {

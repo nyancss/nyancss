@@ -93,6 +93,12 @@ test('it allows to override the tag using default props', t => {
   t.deepEqual(args, ['span', { className: 'component-class' }, 42])
 })
 
+test('it allows to mix classes with custom `className` props', t => {
+    const { Component } = decss(passArgs, { Component: 'component-class' })
+    const [,props,] = Component({ className: 'original-class' })
+    t.deepEqual(props, { className: 'component-class original-class' })
+})
+
 test('it passes extra props to the tag element', t => {
   const { Component } = decss(passArgs, {
     Component: 'component-class',
