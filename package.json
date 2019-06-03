@@ -1,0 +1,22 @@
+{
+  "name": "nyancss",
+  "version": "1.0.0",
+  "description": "Write plain CSS, import as React/Preact components",
+  "main": "lib/index.js",
+  "repository": "https://github.com/nyancss/nyancss",
+  "author": "Sasha Koss <koss@nocorp.me>",
+  "license": "MIT",
+  "dependencies": {
+    "postcss": "^7.0.16",
+    "postcss-selector-parser": "^6.0.2"
+  },
+  "devDependencies": {
+    "@babel/preset-env": "^7.4.5",
+    "@babel/preset-typescript": "^7.3.3",
+    "@types/jest": "^24.0.13",
+    "@types/node": "^12.0.4",
+    "jest": "^24.8.0",
+    "prettier": "^1.17.1",
+    "typescript": "^3.5.1"
+  }
+}
