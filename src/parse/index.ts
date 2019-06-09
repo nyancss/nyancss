@@ -1,6 +1,6 @@
+import { NyanCSSMap } from '@nyancss/types'
 import { parse as parseCSS } from 'postcss'
 import parser from 'postcss-selector-parser'
-import { NyanCSSMap } from '../types'
 
 export default function parse(css: string) {
   const root = parseCSS(css)

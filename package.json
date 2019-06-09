@@ -1,5 +1,5 @@
 {
-  "name": "nyancss",
+  "name": "@nyancss/core",
   "version": "1.0.0",
   "description": "Write plain CSS, import as React/Preact components",
   "main": "lib/index.js",
@@ -7,6 +7,7 @@
   "author": "Sasha Koss <koss@nocorp.me>",
   "license": "MIT",
   "dependencies": {
+    "@nyancss/types": "../nyancss-types/lib",
     "postcss": "^7.0.16",
     "postcss-selector-parser": "^6.0.2"
   },
