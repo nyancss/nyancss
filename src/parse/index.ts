@@ -95,13 +95,15 @@ function applyComponent(
   componentName: string,
   className?: string
 ) {
-  map[componentName] = map[componentName] || emptyComponent(className)
+  map[componentName] =
+    map[componentName] || emptyComponent(componentName, className)
   if (!map[componentName].className && className)
     map[componentName].className = className
 }
 
-function emptyComponent(className: string | undefined) {
+function emptyComponent(componentName: string, className: string | undefined) {
   return {
+    componentName,
     tag: undefined,
     className,
     props: {}

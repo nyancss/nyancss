@@ -14,12 +14,14 @@ describe('parseCSS', () => {
 `)
     ).toEqual({
       Button: {
+        componentName: 'Button',
         tag: undefined,
         className: 'Button',
         props: {}
       },
 
       Input: {
+        componentName: 'Input',
         tag: undefined,
         className: 'Input',
         props: {}
@@ -36,12 +38,14 @@ describe('parseCSS', () => {
 `)
     ).toEqual({
       Button: {
+        componentName: 'Button',
         tag: undefined,
         className: 'Button',
         props: {}
       },
 
       Input: {
+        componentName: 'Input',
         tag: undefined,
         className: 'Input',
         props: {}
@@ -58,12 +62,14 @@ describe('parseCSS', () => {
 `)
     ).toEqual({
       Button: {
+        componentName: 'Button',
         tag: undefined,
         className: 'Button',
         props: {}
       },
 
       Input: {
+        componentName: 'Input',
         tag: undefined,
         className: 'Input',
         props: {}
@@ -85,6 +91,7 @@ describe('parseCSS', () => {
 `)
     ).toEqual({
       Button: {
+        componentName: 'Button',
         tag: undefined,
         className: 'Button',
         props: {
@@ -107,6 +114,7 @@ describe('parseCSS', () => {
 `)
     ).toEqual({
       Text: {
+        componentName: 'Text',
         tag: undefined,
         className: undefined,
         props: {
@@ -134,6 +142,7 @@ describe('parseCSS', () => {
 `)
     ).toEqual({
       Button: {
+        componentName: 'Button',
         tag: undefined,
         className: 'Button',
         props: {
@@ -164,6 +173,7 @@ describe('parseCSS', () => {
 `)
     ).toEqual({
       Text: {
+        componentName: 'Text',
         tag: undefined,
         className: 'Text',
         props: {
@@ -210,6 +220,7 @@ describe('parseCSS', () => {
 `)
     ).toEqual({
       Spacing: {
+        componentName: 'Spacing',
         tag: undefined,
         className: undefined,
         props: {
@@ -227,6 +238,7 @@ describe('parseCSS', () => {
       },
 
       Link: {
+        componentName: 'Link',
         tag: undefined,
         className: undefined,
         props: {
