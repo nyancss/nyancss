@@ -12,7 +12,7 @@ export default function parse(css: string) {
           extractClasses(node.selector).forEach(className => {
             tryApplyBooleanProp(map, className) ||
               tryApplyEnumProp(map, className) ||
-              applyComponent(map, className)
+              applyComponent(map, className, className)
           })
         }
         return map
@@ -90,11 +90,17 @@ function tryApplyEnumProp(map: NyanCSSMap, className: string) {
   return false
 }
 
-function applyComponent(map: NyanCSSMap, className: string) {
-  map[className] = map[className] || emptyComponent(className)
+function applyComponent(
+  map: NyanCSSMap,
+  componentName: string,
+  className?: string
+) {
+  map[componentName] = map[componentName] || emptyComponent(className)
+  if (!map[componentName].className && className)
+    map[componentName].className = className
 }
 
-function emptyComponent(className: string) {
+function emptyComponent(className: string | undefined) {
   return {
     tag: undefined,
     className,

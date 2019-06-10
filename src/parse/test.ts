@@ -71,7 +71,7 @@ describe('parseCSS', () => {
     })
   })
 
-  it('parses modifier selectors', () => {
+  it('parses props selectors', () => {
     expect(
       parse(`
 .Button {
@@ -92,6 +92,28 @@ describe('parseCSS', () => {
             propName: 'active',
             type: 'boolean',
             className: 'Button-active'
+          }
+        }
+      }
+    })
+  })
+
+  it('parses prop selector without parent class name', () => {
+    expect(
+      parse(`
+.Text-bold {
+  font-weight: bold;
+}
+`)
+    ).toEqual({
+      Text: {
+        tag: undefined,
+        className: undefined,
+        props: {
+          bold: {
+            propName: 'bold',
+            type: 'boolean',
+            className: 'Text-bold'
           }
         }
       }
@@ -189,7 +211,7 @@ describe('parseCSS', () => {
     ).toEqual({
       Spacing: {
         tag: undefined,
-        className: 'Spacing',
+        className: undefined,
         props: {
           padded: {
             propName: 'padded',
@@ -206,7 +228,7 @@ describe('parseCSS', () => {
 
       Link: {
         tag: undefined,
-        className: 'Link',
+        className: undefined,
         props: {
           active: {
             propName: 'active',
