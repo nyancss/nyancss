@@ -1,5 +1,7 @@
 # 🌈 Nyan CSS
 
+TODO CHECK THE GRAMMAR!
+
 **Best of both worlds**. Nyan CSS lets you write plain CSS while riping
 benifits of CSS-in-JS.
 
@@ -7,17 +9,17 @@ benifits of CSS-in-JS.
 from static HTML+CSS and ending with React and Vue.js without actually
 changing the CSS.
 
-**Minimalistic**. BEM-inspired Nyan CSS convention consists just of 3 rules but
-it as bulletproof as BEM.
+**Minimalistic**. BEM-inspired [Nyan CSS convention](#convention) consists
+just of 3 rules but it as bulletproof as BEM.
 
 **Use modern CSS**. CoffeeScript has gone from the radars yet we all loved it.
 Stick to the platform to ensure the longevity of your code.
 
-**[Join the community](https://spectrum.chat/nyancss)**
+**[Skip to convention](#convention)** | **[Join the community](https://spectrum.chat/nyancss)**
 
 ## Installation
 
-See [installation instructions for webpack with React/Preact/Vue.js/Classnames](https://github.com/nyancss/nyancss-css-modules-loader#installation).
+See [installation instructions for webpack](https://github.com/nyancss/nyancss-css-modules-loader#installation).
 
 ## Demo
 
@@ -74,6 +76,9 @@ function Announcement() {
 ![A page in a browser with large "Welcome Nyan CSS" and moving italic "Please, welcome Nyan CSS!"](./docs/demo.gif)
 
 ### Other options
+
+<details><summary>Show all options</summary>
+<p>
 
 #### Plain HTML
 
@@ -141,6 +146,69 @@ function Announcement() {
   })}'>Please, welcome Nyan CSS!</marquee>
 `
 }
+```
+
+</p>
+</details>
+
+## Convention
+
+### Component
+
+`.Component` is a component class.
+
+_The name must be in ClassCase, e.g. `.FormInput` ror `.UI`._
+
+In this example, `.Button` represents `<Button />`.
+
+```css
+.Button {
+  color: white;
+}
+```
+
+### Boolean prop
+
+`.Component-disabled` is a boolean prop class.
+
+_The name extension must be in camelCase, e.g. `.FormInput-autoFocus` or `.UI-dev`._
+
+```css
+.Button-disabled {
+  opacity: 0.5;
+}
+```
+
+In the example, `.Button-disabled` is applied to the component when its `disabled` prop is truthy:
+
+```javascript
+<Button tag="button" disabled>
+  Whatever
+</Button>
+```
+
+### Enum prop
+
+`.ComponentName-color-gray` is an enum prop class.
+
+_The name extensions must be in camelCase, e.g. `.FormInput-borderColor-lightGray` or `.UI-env-dev`._
+
+```css
+.Button-color-red {
+  background: red;
+}
+
+.Button-color-green {
+  background: green;
+}
+```
+
+`.Button-color-red` is applied to the component when its `color` prop equals `"red"`:
+
+```jsx
+<Button tag="button" color="red">
+  Click Me
+</Button>
 ```
 
 ## Related packages
