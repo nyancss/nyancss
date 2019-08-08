@@ -18,4 +18,4 @@ build:
 	@node -e "require('fs').writeFileSync('./lib/package.json', JSON.stringify(Object.assign(require('./package.json'), { main: 'index.js' }), null, 2))"
 
 publish: build
-	cd lib && npm publish
+	cd lib && npm publish --access public
