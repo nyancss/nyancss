@@ -13,6 +13,10 @@ it as bulletproof as BEM.
 **Use modern CSS**. CoffeeScript has gone from the radars yet we all loved it.
 Stick to the platform to ensure the longevity of your code.
 
+**[Join the community](https://spectrum.chat/nyancss)**
+
+## Installation
+
 See [installation instructions for webpack with React/Preact/Vue.js/Classnames](https://github.com/nyancss/nyancss-css-modules-loader#installation).
 
 ## Demo
@@ -45,7 +49,7 @@ See other options:
 - [Plain HTML](#plain-html)
 - [Vue.js](#vuejs)
 - [Preact](#preact)
-- [Classnames](#Classnames)
+- [Class names](#class-names)
 
 ```jsx
 import React from 'react'
@@ -124,7 +128,7 @@ function Announcement() {
 }
 ```
 
-#### Classnames
+#### Class names
 
 ```js
 import { Header, Text } from './style.css'
