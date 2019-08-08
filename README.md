@@ -7,14 +7,15 @@ benifits of CSS-in-JS.
 from static HTML+CSS and ending with React and Vue.js without actually
 changing the CSS.
 
-**Minimalistic**. Nyan CSS convention consists just of
+**Minimalistic**. BEM-inspired Nyan CSS convention consists just of 3 rules but
+it as bulletproof as BEM.
 
 **Use modern CSS**. CoffeeScript has gone from the radars yet we all loved it.
 Stick to the platform to ensure the longevity of your code.
 
-**See it in action:**
+## Demo
 
-CSS:
+### CSS
 
 ```css
 .Header,
@@ -35,9 +36,16 @@ CSS:
 }
 ```
 
-React:
+### React code
 
-```js
+See other options:
+
+- [Plain HTML](#plain-html)
+- [Vue.js](#vuejs)
+- [Preact](#preact)
+
+```jsx
+import React from 'react'
 import { Header, Text } from './style.css'
 
 function Announcement() {
@@ -54,20 +62,61 @@ function Announcement() {
 }
 ```
 
-Result:
+### Result
 
 ![A page in a browser with large "Welcome Nyan CSS" and moving italic "Please, welcome Nyan CSS!"](./docs/demo.gif)
 
-## What is Nyan CSS?
+### Other options
 
-Nyan CSS is a class naming convention and family of libraries that
+#### Plan HTML
 
-Write plain CSS and get benifits of CSS-in-JS.
+```html
+<h1 class="Header Header-size-large">
+  Welcome Nyan CSS!
+</h1>
 
-**What is Nyan CSS?** It's not a CSS-in-JS solution, but it provides
-benifits of CSS-in-JS.
+<marquee class="Text Text-italic">
+  Please, welcome Nyan CSS!
+</marquee>
+```
 
-Nyan CSS is a convention that allows writing plain CSS and import it as
-React/Preact components (via webpack loader). Unlike CSS-in-JS, you can also use
-it in static websites without any changes. It also doesn't require slowish
-runtime or precompilation step.
+#### Vue.js
+
+```js
+import Vue from 'vue'
+import { Header, Text } from './style.css'
+
+const Announcement = {
+  components: {
+    'custom-header': Header,
+    'custom-text': Text
+  },
+
+  template: `
+    <main>
+      <custom-header tag='h1' size='large'>Welcome Nyan CSS!!</custom-header>
+      <custom-text tag='marquee' italic='true'>Please, welcome Nyan CSS!</custom-text>
+    </main>
+  `
+}
+```
+
+#### Preact
+
+```jsx
+import { h } from 'preact'
+import { Header, Text } from './style.css'
+
+function Announcement() {
+  return (
+    <>
+      <Header tag="h1" size="large">
+        Welcome Nyan CSS!
+      </Header>
+      <Text tag="marquee" italic>
+        Please, welcome Nyan CSS!
+      </Text>
+    </>
+  )
+}
+```
