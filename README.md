@@ -13,7 +13,7 @@ it as bulletproof as BEM.
 **Use modern CSS**. CoffeeScript has gone from the radars yet we all loved it.
 Stick to the platform to ensure the longevity of your code.
 
-[**Jump to How to install**](#how-to-install)
+See [installation instructions for webpack with React/Preact/Vue.js/Classnames](https://github.com/nyancss/nyancss-css-modules-loader#installation).
 
 ## Demo
 
@@ -139,14 +139,18 @@ function Announcement() {
 }
 ```
 
-## How to install
+## Related packages
 
-You don't need to install anything if you use plain HTML, but if want to use
-Nyan CSS with React or say Vue.js you need a loader for your bundler.
-At the moment only wepack is supported but Rollup is in progress.
+- [@nyancss/css-modules](https://github.com/nyancss/nyancss-css-modules-loader) - the webpack loader for CSS Modules.
+- [@nyancss/css-modules](https://github.com/nyancss/nyancss-css-modules) - the package used to convert CSS Modules to Nyan CSS.
+- [@nyancss/react](https://github.com/nyancss/nyancss-react) - the package used to convert Nyan CSS to React/Preact components.
+- [@nyancss/vue](https://github.com/nyancss/nyancss-vue) - the package used to convert Nyan CSS to Vue.js components.
+- [@nyancss/class-names](https://github.com/nyancss/nyancss-class-names) - the package used to convert Nyan CSS to class names functions.
 
-### Installing with React/Preact
+## Changelog
 
-### Installing with Vue.js
+See [the changelog](./CHANGELOG.md).
 
-### Installing with Classnames
+## License
+
+[MIT © Sasha Koss](https://kossnocorp.mit-license.org/)
