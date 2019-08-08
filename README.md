@@ -1,7 +1,5 @@
 # 🌈 Nyan CSS
 
-TODO CHECK THE GRAMMAR!
-
 **Best of both worlds**. Best of both worlds. Nyan CSS lets you write plain CSS
 while ripping benefits of CSS-in-JS.
 
