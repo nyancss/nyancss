@@ -1,6 +1,6 @@
 # 🌈 Nyan CSS
 
-**Best of both worlds**. Best of both worlds. Nyan CSS lets you write plain CSS
+**Best of both worlds**. Nyan CSS lets you write plain CSS
 while ripping benefits of CSS-in-JS.
 
 **Write a universal design system**. You can reuse the same code anywhere
