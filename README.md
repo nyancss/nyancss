@@ -1,4 +1,4 @@
-# Nyan CSS
+# 🌈 Nyan CSS
 
 **Best of both worlds**. Nyan CSS lets you write plain CSS while riping
 benifits of CSS-in-JS.
@@ -12,6 +12,8 @@ it as bulletproof as BEM.
 
 **Use modern CSS**. CoffeeScript has gone from the radars yet we all loved it.
 Stick to the platform to ensure the longevity of your code.
+
+[**Jump to How to install**](#how-to-install)
 
 ## Demo
 
@@ -43,6 +45,7 @@ See other options:
 - [Plain HTML](#plain-html)
 - [Vue.js](#vuejs)
 - [Preact](#preact)
+- [Classnames](#Classnames)
 
 ```jsx
 import React from 'react'
@@ -68,7 +71,7 @@ function Announcement() {
 
 ### Other options
 
-#### Plan HTML
+#### Plain HTML
 
 ```html
 <h1 class="Header Header-size-large">
@@ -120,3 +123,30 @@ function Announcement() {
   )
 }
 ```
+
+#### Classnames
+
+```js
+import { Header, Text } from './style.css'
+
+function Announcement() {
+  return `
+<h1 class='${Header({ size: 'large' })}'>Welcome Nyan CSS!</h1>
+<marquee class='${Text({
+    italic: true
+  })}'>Please, welcome Nyan CSS!</marquee>
+`
+}
+```
+
+## How to install
+
+You don't need to install anything if you use plain HTML, but if want to use
+Nyan CSS with React or say Vue.js you need a loader for your bundler.
+At the moment only wepack is supported but Rollup is in progress.
+
+### Installing with React/Preact
+
+### Installing with Vue.js
+
+### Installing with Classnames
