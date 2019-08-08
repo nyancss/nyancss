@@ -56,7 +56,7 @@ function Announcement() {
 
 Result:
 
-![A page in a browser with large "Welcome Nyan CSS" and moving italic "Please, welcome Nyan CSS!"](./doc/demo.gif)
+![A page in a browser with large "Welcome Nyan CSS" and moving italic "Please, welcome Nyan CSS!"](./docs/demo.gif)
 
 ## What is Nyan CSS?
 
