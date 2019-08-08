@@ -15,7 +15,7 @@ just of 3 rules but it as bulletproof as BEM.
 **Use modern CSS**. CoffeeScript has gone from the radars yet we all loved it.
 Stick to the platform to ensure the longevity of your code.
 
-**[Skip to convention](#convention)** | **[Join the community](https://spectrum.chat/nyancss)**
+**[Skip to the convention](#convention)** | **[Join the community](https://spectrum.chat/nyancss)**
 
 ## Installation
 
