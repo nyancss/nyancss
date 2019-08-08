@@ -77,7 +77,7 @@ function Announcement() {
 
 ### Other options
 
-<details><summary>Show all options</summary>
+<details open><summary>Show all options</summary>
 <p>
 
 #### Plain HTML
