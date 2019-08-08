@@ -179,7 +179,7 @@ _The name extension must be in camelCase, e.g. `.FormInput-autoFocus` or `.UI-de
 
 In the example, `.Button-disabled` is applied to the component when its `disabled` prop is truthy:
 
-```javascript
+```jsx
 <Button tag="button" disabled>
   Whatever
 </Button>
