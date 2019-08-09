@@ -211,7 +211,7 @@ _The name extensions must be in camelCase, e.g. `.FormInput-borderColor-lightGra
 
 ## Related packages
 
-- [@nyancss/css-modules](https://github.com/nyancss/nyancss-css-modules-loader) - the webpack loader for CSS Modules.
+- [@nyancss/css-modules-loader](https://github.com/nyancss/nyancss-css-modules-loader) - the webpack loader for CSS Modules.
 - [@nyancss/css-modules](https://github.com/nyancss/nyancss-css-modules) - the package used to convert CSS Modules to Nyan CSS.
 - [@nyancss/react](https://github.com/nyancss/nyancss-react) - the package used to convert Nyan CSS to React/Preact components.
 - [@nyancss/vue](https://github.com/nyancss/nyancss-vue) - the package used to convert Nyan CSS to Vue.js components.
