@@ -155,7 +155,7 @@ function Announcement() {
 
 `.Component` is a component class.
 
-_The name must be in ClassCase, e.g. `.FormInput` ror `.UI`._
+_The name must be in ClassCase, e.g. `.FormInput` or `.UI`._
 
 In this example, `.Button` represents `<Button />`.
 
