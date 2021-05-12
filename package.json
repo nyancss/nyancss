@@ -9,7 +9,7 @@
   "dependencies": {
     "@nyancss/types": "../nyancss-types/lib",
     "@nyancss/utils": "../nyancss-utils/lib/",
-    "postcss": "^7.0.16",
+    "postcss": "^8.2.10",
     "postcss-selector-parser": "^6.0.2"
   },
   "devDependencies": {
