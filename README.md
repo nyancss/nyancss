@@ -1,7 +1,7 @@
 # 🌈 Nyan CSS
 
 **Best of both worlds**. Nyan CSS lets you write plain CSS
-while reaping benefits of CSS-in-JS.
+while reaping the benefits of CSS-in-JS.
 
 **Write a universal design system**. You can reuse the same code anywhere
 starting from static HTML+CSS and ending with React and Vue.js without
@@ -13,7 +13,7 @@ just of 3 rules but it as bulletproof as BEM.
 **Use modern CSS**. CoffeeScript long gone from the radars, yet we all loved it ;-)
 Stick to the platform to ensure the longevity of your code.
 
-**[Skip to the convention](#convention)** | **[Join the community](https://spectrum.chat/nyancss)**
+**[Skip to the convention](#convention)** 
 
 ## Installation
 
